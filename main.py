@@ -1,11 +1,15 @@
 import os
-import dotenv
+# import dotenv
+from dotenv import load_dotenv
 from langchain_groq import ChatGroq 
 from langchain_core.prompts import PromptTemplate
 
 
+# work when running locally
+# os.environ['GROQ_API_KEY'] =dotenv.get_key(dotenv.find_dotenv(), "GROQ_API_KEY")
 
-os.environ['GROQ_API_KEY'] =dotenv.get_key(dotenv.find_dotenv(), "GROQ_API_KEY")
+#Use when push on github
+load_dotenv()
 
 model = ChatGroq(model ="llama-3.1-8b-instant" , temperature=0.6)
 
