@@ -1,0 +1,11 @@
+.env
+
+#Python cache
+__pycache__/
+*.pyc
+
+#IDE
+.vscode/
+.idea/
+
+#OS junks
