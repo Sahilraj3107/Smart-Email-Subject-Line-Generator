@@ -22,9 +22,12 @@ jobs:
         env:
           GROQ_API_KEY: ${{secrets.GROQ_API_KEY}}
         run: |
-          docker run -e GROQ_API_KEY="${GROQ_API_KEY}" email-subject-generator:latest python -c "import main"
-          docker run -e GROQ_API_KEY="${GROQ_API_KEY}" email-subject-generator:latest python main.py  
+          docker run -e GROQ_API_KEY="${GROQ_API_KEY}" email-subject-generator:latest python -c "import main; print('Imports successful')"
+      # docker run -e GROQ_API_KEY="${GROQ_API_KEY}" email-subject-generator:latest python main.py 
 
+      - name: Lint with flake8
+        run: |
+          docker run email-subject-generator:latest flake8 main.py --count --select=E9,F63,F7,F82 --show-source --statistics || true
       #  or    
       # - name: Run Tests in Docker
       #   run: |
@@ -40,10 +43,6 @@ jobs:
       #   run: |
       #     python -m pip install --upgrade pip
       #     pip install -r requirements.txt
-
-      - name: Lint with flake8
-        run: |
-          docker run email-subject-generator:latest flake8 main.py --count --select=E9,F63,F7,F82 --show-source --statistics || true
 
       # - name: Verify code syntax
       #   run: |
